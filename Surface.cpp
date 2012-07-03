@@ -49,3 +49,13 @@ bool Surface::DrawRegion(SDL_Surface* destSurface, SDL_Surface* srcSurface, int 
 
   return true;
 }
+
+bool Surface::Transparent(SDL_Surface* destSurface, int R, int G, int B) {
+  if (destSurface == NULL) {
+    return false;
+  }
+
+  SDL_SetColorKey(destSurface, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(destSurface->format, R, G, B));
+
+  return true;
+}
