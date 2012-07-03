@@ -5,12 +5,14 @@
 
 #include "Event.h"
 #include "Surface.h"
+#include "Animation.h"
 
 class Game : public Event {
 private:
   bool running;
   SDL_Surface* displaySurface;
   SDL_Surface* testSurface;
+  Animation yoshiAnim;
 public:
   Game();
   int OnExecute();

@@ -36,9 +36,12 @@ bool Game::OnInit() {
     return false;
   }
 
-  if ((testSurface = Surface::Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\fry.bmp")) == NULL) {
+  if ((testSurface = Surface::Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.bmp")) == NULL) {
     return false;
   }
+
+  yoshiAnim.maxFrames = 8;
+  //yoshiAnim.oscillate = true;
 
   return true;
 }
@@ -55,11 +58,13 @@ void Game::OnExit() {
 }
 
 void Game::OnLoop() {
+  yoshiAnim.OnAnimate();
 }
 
 void Game::OnRender() {
-  Surface::Draw(displaySurface, testSurface, 0, 0);
-  Surface::DrawRegion(displaySurface, testSurface, 400, 0, 0, 0, 198, 140);
+  //Surface::Draw(displaySurface, testSurface, 0, 0);
+  //Surface::DrawRegion(displaySurface, testSurface, 400, 0, 0, 0, 198, 140);
+  Surface::DrawRegion(displaySurface, testSurface, 290, 220, 0, yoshiAnim.GetCurrentFrame() * 64, 64, 64);
   SDL_Flip(displaySurface);
 }
 
