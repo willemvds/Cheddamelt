@@ -3,9 +3,10 @@
 
 #include <SDL.h>
 
+#include "Event.h"
 #include "Surface.h"
 
-class Game {
+class Game : public Event {
 private:
   bool running;
   SDL_Surface* displaySurface;
@@ -15,6 +16,7 @@ public:
   int OnExecute();
   bool OnInit();
   void OnEvent(SDL_Event* event);
+  void OnExit();
   void OnLoop();
   void OnRender();
   void OnCleanup();

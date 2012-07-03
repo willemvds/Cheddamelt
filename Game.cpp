@@ -44,9 +44,14 @@ bool Game::OnInit() {
 }
 
 void Game::OnEvent(SDL_Event* event) {
-  if (event->type == SDL_QUIT) {
+  /*if (event->type == SDL_QUIT) {
     running = false;
-  }
+  }*/
+  Event::OnEvent(event);
+}
+
+void Game::OnExit() {
+  running = false;
 }
 
 void Game::OnLoop() {
