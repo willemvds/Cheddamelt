@@ -7,11 +7,11 @@ SDL_Surface* Surface::Load(char* filename) {
   SDL_Surface* tempSurface = NULL;
   SDL_Surface* returnSurface = NULL;
 
-  if ((tempSurface = SDL_LoadBMP(filename)) == NULL) {
+  if ((tempSurface = IMG_Load(filename)) == NULL) {
     return NULL;
   }
 
-  returnSurface = SDL_DisplayFormat(tempSurface);
+  returnSurface = SDL_DisplayFormatAlpha(tempSurface);
   SDL_FreeSurface(tempSurface);
   return returnSurface;
 }

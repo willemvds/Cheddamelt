@@ -36,18 +36,18 @@ bool Game::OnInit() {
     return false;
   }
 
-  if ((testSurface = Surface::Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.bmp")) == NULL) {
+  if ((testSurface = Surface::Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.png")) == NULL) {
     return false;
   }
 
   yoshiAnim.maxFrames = 8;
   //yoshiAnim.oscillate = true;
 
-  if (entity1.Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.bmp", 64, 64, 8) == false) {
+  if (entity1.Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.png", 64, 64, 8) == false) {
     return false;
   }
 
-  if (entity2.Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.bmp", 64, 64, 8) == false) {
+  if (entity2.Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.png", 64, 64, 8) == false) {
     return false;
   }
   entity2.x = 100;
