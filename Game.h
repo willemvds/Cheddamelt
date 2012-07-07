@@ -3,6 +3,9 @@
 
 #include <SDL.h>
 
+#include "Define.h"
+#include "Area.h"
+#include "Camera.h"
 #include "Entity.h"
 #include "Event.h"
 #include "Surface.h"
@@ -26,6 +29,7 @@ public:
   void OnLoop();
   void OnRender();
   void OnCleanup();
+  void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
 };
 
 #endif

@@ -32,7 +32,7 @@ bool Game::OnInit() {
     return false;
   }
 
-  if ((displaySurface = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) {
+  if ((displaySurface = SDL_SetVideoMode(WINDOWWIDTH, WINDOWHEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) {
     return false;
   }
 
@@ -54,6 +54,12 @@ bool Game::OnInit() {
 
   Entity::entityList.push_back(&entity1);
   Entity::entityList.push_back(&entity2);
+
+  if (Area::areaControl.Load("C:\\Cheddamelt\\maps\\1.area") == false) {
+    return false;
+  }
+
+  SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
 
   return true;
 }
@@ -83,6 +89,8 @@ void Game::OnLoop() {
 void Game::OnRender() {
   //Surface::Draw(displaySurface, testSurface, 0, 0);
   //Surface::DrawRegion(displaySurface, testSurface, 400, 0, 0, 0, 198, 140);
+  Area::areaControl.OnRender(displaySurface, Camera::cameraControl.getX(), Camera::cameraControl.getY());
+  
   Surface::DrawRegion(displaySurface, testSurface, 290, 220, 0, yoshiAnim.GetCurrentFrame() * 64, 64, 64);
 
   for (int i = 0; i < Entity::entityList.size(); i++) {
@@ -107,5 +115,24 @@ void Game::OnCleanup() {
   }
   Entity::entityList.clear();
 
+  Area::areaControl.OnCleanup();
+
   SDL_Quit();
+}
+
+void Game::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
+  switch (sym) {
+    case SDLK_UP:
+      Camera::cameraControl.OnMove(0, -5);
+      break;
+    case SDLK_DOWN:
+      Camera::cameraControl.OnMove(0, 5);
+      break;
+    case SDLK_LEFT:
+      Camera::cameraControl.OnMove(-5, 0);
+      break;
+    case SDLK_RIGHT:
+      Camera::cameraControl.OnMove(5, 0);
+      break;
+  }
 }
