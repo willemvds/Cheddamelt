@@ -43,6 +43,18 @@ bool Game::OnInit() {
   yoshiAnim.maxFrames = 8;
   //yoshiAnim.oscillate = true;
 
+  if (entity1.Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.bmp", 64, 64, 8) == false) {
+    return false;
+  }
+
+  if (entity2.Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.bmp", 64, 64, 8) == false) {
+    return false;
+  }
+  entity2.x = 100;
+
+  Entity::entityList.push_back(&entity1);
+  Entity::entityList.push_back(&entity2);
+
   return true;
 }
 
@@ -59,17 +71,41 @@ void Game::OnExit() {
 
 void Game::OnLoop() {
   yoshiAnim.OnAnimate();
+
+  for (int i = 0; i < Entity::entityList.size(); i++) {
+    if (!Entity::entityList[i])
+      continue;
+
+    Entity::entityList[i]->OnLoop();
+  }
 }
 
 void Game::OnRender() {
   //Surface::Draw(displaySurface, testSurface, 0, 0);
   //Surface::DrawRegion(displaySurface, testSurface, 400, 0, 0, 0, 198, 140);
   Surface::DrawRegion(displaySurface, testSurface, 290, 220, 0, yoshiAnim.GetCurrentFrame() * 64, 64, 64);
+
+  for (int i = 0; i < Entity::entityList.size(); i++) {
+    if (!Entity::entityList[i])
+      continue;
+
+    Entity::entityList[i]->OnRender(displaySurface);
+  }
+
   SDL_Flip(displaySurface);
 }
 
 void Game::OnCleanup() {
   SDL_FreeSurface(testSurface);
   SDL_FreeSurface(displaySurface);
+
+  for (int i = 0; i < Entity::entityList.size(); i++) {
+    if (!Entity::entityList[i])
+      continue;
+
+    Entity::entityList[i]->OnCleanup();
+  }
+  Entity::entityList.clear();
+
   SDL_Quit();
 }
