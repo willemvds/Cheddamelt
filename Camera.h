@@ -16,8 +16,8 @@ public:
 private:
   int x;
   int y;
-  int* targetX;
-  int* targetY;
+  float* targetX;
+  float* targetY;
 public:
   static Camera cameraControl;
   int targetMode;
@@ -25,7 +25,7 @@ public:
   int getX();
   int getY();
   void setPos(int x, int y);
-  void setTarget(int* x, int* y);
+  void setTarget(float* x, float* y);
 };
 
 #endif

@@ -46,6 +46,32 @@ bool Area::Load(char* filename) {
   return true;
 }
 
+Map* Area::getMap(int x, int y) {
+  int mapWidth = MAP_WIDTH * TILE_SIZE;
+  int mapHeight = MAP_WIDTH * TILE_SIZE;
+
+  int id = (x / mapWidth) + ((y / mapHeight) * areaSize);
+  if (id < 0 || id >= mapList.size()) {
+    return NULL;
+  }
+
+  return &mapList[id];
+}
+
+Tile* Area::getTile(int x, int y) {
+  int mapWidth = MAP_WIDTH * TILE_SIZE;
+  int mapHeight = MAP_HEIGHT * TILE_SIZE;
+  Map* map = getMap(x, y);
+  if (map == NULL) {
+    return NULL;
+  }
+
+  x = x % mapWidth;
+  y = y % mapHeight;
+
+  return map->getTile(x, y);
+}
+
 void Area::OnRender(SDL_Surface* displaySurface, int cameraX, int cameraY) {
   int mapWidth = MAP_WIDTH * TILE_SIZE;
   int mapHeight = MAP_HEIGHT * TILE_SIZE;

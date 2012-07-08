@@ -15,6 +15,7 @@ private:
   std::vector<Tile> tileList;
 public:
   SDL_Surface* tilesetSurface;
+  Tile* getTile(int x, int y);
   bool Load(char* filename);
   void OnRender(SDL_Surface* displaySurface, int mapX, int mapY);
 };

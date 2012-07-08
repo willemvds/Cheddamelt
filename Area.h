@@ -13,6 +13,10 @@ private:
 public:
   static Area areaControl;
   std::vector<Map> mapList;
+
+  Map* getMap(int x, int y);
+  Tile* getTile(int x, int y);
+
   bool Load(char* filename);
   void OnRender(SDL_Surface* displaySurface, int cameraX, int cameraY);
   void OnCleanup();

@@ -6,6 +6,10 @@ Game::Game() {
   testSurface = NULL;
 }
 
+char* Game::getCwd() {
+  return cwd;
+}
+
 int Game::OnExecute() {
   if (OnInit() == false) {
     return -1;
@@ -28,6 +32,14 @@ int Game::OnExecute() {
 }
 
 bool Game::OnInit() {
+  char tempPath[255];
+  if ((cwd = _getcwd(NULL, 0)) == NULL) {
+    return false;
+  }
+  strcpy(tempPath, cwd);
+  strcat(cwd, "/../Debug/");
+  
+
   if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
     return false;
   }
@@ -36,18 +48,20 @@ bool Game::OnInit() {
     return false;
   }
 
-  if ((testSurface = Surface::Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.png")) == NULL) {
+  strcpy(tempPath, getCwd());
+  strcat(tempPath, "yoshi.png");
+  if ((testSurface = Surface::Load(tempPath)) == NULL) {
     return false;
   }
 
   yoshiAnim.maxFrames = 8;
   //yoshiAnim.oscillate = true;
 
-  if (entity1.Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.png", 64, 64, 8) == false) {
+  if (entity1.Load(tempPath, 64, 64, 8) == false) {
     return false;
   }
 
-  if (entity2.Load("C:\\Users\\Willem\\Documents\\Visual Studio 11\\Projects\\Cheddamelt\\Debug\\yoshi.png", 64, 64, 8) == false) {
+  if (entity2.Load(tempPath, 64, 64, 8) == false) {
     return false;
   }
   entity2.x = 100;
@@ -55,7 +69,27 @@ bool Game::OnInit() {
   Entity::entityList.push_back(&entity1);
   Entity::entityList.push_back(&entity2);
 
-  if (Area::areaControl.Load("C:\\Cheddamelt\\maps\\1.area") == false) {
+  if (player1.Load(tempPath, 64, 64, 8) == false) {
+    return false;
+  }
+
+  if (player2.Load(tempPath, 64, 64, 8) == false) {
+    return false;
+  }
+
+  player1.x = 200;
+  player2.x = 300;
+
+  Entity::entityList.push_back(&player1);
+  Entity::entityList.push_back(&player2);
+
+  Camera::cameraControl.targetMode = TARGET_MODE_CENTER;
+  Camera::cameraControl.setTarget(&player1.x, &player1.y);
+
+  strcpy(tempPath, getCwd());
+  strcat(tempPath, "maps\\1.area");
+  if (Area::areaControl.Load(tempPath) == false) {
+  //if (Area::areaControl.Load("C:\\Cheddamelt\\maps\\1.area") == false) {
     return false;
   }
 
@@ -84,12 +118,14 @@ void Game::OnLoop() {
 
     Entity::entityList[i]->OnLoop();
   }
+
+  FPS::fpsControl.OnLoop();
 }
 
 void Game::OnRender() {
   //Surface::Draw(displaySurface, testSurface, 0, 0);
   //Surface::DrawRegion(displaySurface, testSurface, 400, 0, 0, 0, 198, 140);
-  Area::areaControl.OnRender(displaySurface, Camera::cameraControl.getX(), Camera::cameraControl.getY());
+  Area::areaControl.OnRender(displaySurface, -Camera::cameraControl.getX(), -Camera::cameraControl.getY());
   
   Surface::DrawRegion(displaySurface, testSurface, 290, 220, 0, yoshiAnim.GetCurrentFrame() * 64, 64, 64);
 
@@ -122,7 +158,13 @@ void Game::OnCleanup() {
 
 void Game::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
   switch (sym) {
-    case SDLK_UP:
+    case SDLK_LEFT:
+      player1.moveLeft = true;
+      break;
+    case SDLK_RIGHT:
+      player1.moveRight = true;
+      break;
+    /*case SDLK_UP:
       Camera::cameraControl.OnMove(0, -5);
       break;
     case SDLK_DOWN:
@@ -133,6 +175,17 @@ void Game::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
       break;
     case SDLK_RIGHT:
       Camera::cameraControl.OnMove(5, 0);
+      break;*/
+  }
+}
+
+void Game::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode) {
+  switch (sym) {
+    case SDLK_LEFT:
+      player1.moveLeft = false;
+      break;
+    case SDLK_RIGHT:
+      player1.moveRight = false;
       break;
   }
 }

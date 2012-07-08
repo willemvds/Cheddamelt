@@ -41,7 +41,7 @@ void Camera::setPos(int x, int y) {
   this->y = y;
 }
 
-void Camera::setTarget(int* x, int* y) {
+void Camera::setTarget(float* x, float* y) {
   this->targetX = x;
   this->targetY = y;
 }

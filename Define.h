@@ -6,7 +6,7 @@
 
 #define TILE_SIZE 16
 
-#define WINDOWWIDTH 800
-#define WINDOWHEIGHT 600
+#define WINDOWWIDTH 640
+#define WINDOWHEIGHT 480
 
 #endif

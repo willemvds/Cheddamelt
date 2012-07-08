@@ -53,3 +53,15 @@ void Map::OnRender(SDL_Surface* displaySurface, int mapX, int mapY) {
     }
   }
 }
+
+Tile* Map::getTile(int x, int y) {
+  int id = 0;
+
+  id = (x / TILE_SIZE) + (MAP_WIDTH * (y / TILE_SIZE));
+
+  if (id < 0 || id >= tileList.size()) {
+    return NULL;
+  }
+
+  return &tileList[id];
+}
