@@ -1,7 +1,7 @@
 #ifndef FPS_H
 #define FPS_H
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 class FPS
 {

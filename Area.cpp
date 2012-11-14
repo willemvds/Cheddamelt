@@ -83,7 +83,7 @@ void Area::OnRender(SDL_Surface* displaySurface, int cameraX, int cameraY) {
     int id = firstId + ((i / 2) * areaSize) + (i % 2);
     if (id < 0 || id >= mapList.size())
       continue;
-    
+
     int x = ((id % areaSize) * mapWidth) + cameraX;
     int y = ((id / areaSize) * mapHeight) + cameraY;
     mapList[id].OnRender(displaySurface, x, y);
@@ -94,6 +94,6 @@ void Area::OnCleanup() {
   if (tilesetSurface) {
     SDL_FreeSurface(tilesetSurface);
   }
-  
+
   mapList.clear();
 }

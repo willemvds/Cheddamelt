@@ -2,7 +2,7 @@
 #define MAP_H
 
 #include <vector>
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 #include "Tile.h"
 #include "Surface.h"

@@ -33,12 +33,12 @@ int Game::OnExecute() {
 
 bool Game::OnInit() {
   char tempPath[255];
-  if ((cwd = _getcwd(NULL, 0)) == NULL) {
+  if ((cwd = getcwd(NULL, 0)) == NULL) {
     return false;
   }
   strcpy(tempPath, cwd);
   strcat(cwd, "/../Debug/");
-  
+
 
   if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
     return false;
@@ -126,7 +126,7 @@ void Game::OnRender() {
   //Surface::Draw(displaySurface, testSurface, 0, 0);
   //Surface::DrawRegion(displaySurface, testSurface, 400, 0, 0, 0, 198, 140);
   Area::areaControl.OnRender(displaySurface, -Camera::cameraControl.getX(), -Camera::cameraControl.getY());
-  
+
   Surface::DrawRegion(displaySurface, testSurface, 290, 220, 0, yoshiAnim.GetCurrentFrame() * 64, 64, 64);
 
   for (int i = 0; i < Entity::entityList.size(); i++) {

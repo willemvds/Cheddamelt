@@ -1,7 +1,7 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 class Event {
 public:
@@ -35,4 +35,4 @@ public:
   virtual void OnUser(Uint8 type, int code, void* data1, void* data2); // signals?
 };
 
-#endif EVENT_H
+#endif // EVENT_H

@@ -1,8 +1,8 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
 
 class Surface {
 public:

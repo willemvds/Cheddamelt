@@ -1,9 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <direct.h>
+//#include <direct.h>
+#include <unistd.h>
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 #include "Define.h"
 #include "Area.h"

@@ -16,7 +16,7 @@ void Event::OnEvent(SDL_Event* event) {
           else
             OnMouseBlur();
           break;
-        
+
         case SDL_APPINPUTFOCUS:
           if (event->active.gain)
             OnInputFocus();
@@ -187,31 +187,31 @@ void Event::OnJoyButtonUp(Uint8 which, Uint8 button) {
 void Event::OnJoyHat(Uint8 which, Uint8 hat, Uint8 value) {
   // pv;dn
 }
- 
+
 void Event::OnJoyBall(Uint8 which, Uint8 ball, Sint16 xrel, Sint16 yrel) {
   // pv;dn
 }
- 
+
 void Event::OnMinimize() {
   // pv;dn
 }
- 
+
 void Event::OnRestore() {
   // pv;dn
 }
- 
+
 void Event::OnResize(int w, int h) {
   // pv;dn
 }
- 
+
 void Event::OnExpose() {
   // pv;dn
 }
- 
+
 void Event::OnExit() {
   // pv;dn
 }
- 
+
 void Event::OnUser(Uint8 type, int code, void* data1, void* data2) {
   // pv;dn
 }

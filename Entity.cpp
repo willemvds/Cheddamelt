@@ -15,7 +15,7 @@ Entity::Entity() {
   width = 0;
   height = 0;
   animState = 0;
-  
+
   type = ENTITY_TYPE_GENERIC;
   dead = false;
   flags = ENTITY_FLAG_GRAVITY;
@@ -45,7 +45,7 @@ bool Entity::Load(char* filename, int width, int height, int maxFrames) {
   this->height = height;
   this->width = width;
   animControl.maxFrames = maxFrames;
-  
+
   return true;
 }
 
@@ -69,7 +69,7 @@ void Entity::OnLoop() {
   if (speedX < -maxSpeedX) speedX = -maxSpeedX;
   if (speedY > maxSpeedY) speedY = maxSpeedY;
   if (speedY < -maxSpeedY) speedY = -maxSpeedY;
-  
+
   OnAnimate();
   OnMove(speedX, speedY);
 }
@@ -130,7 +130,7 @@ void Entity::OnMove(float moveX, float moveY) {
     if (newY < 0 && moveY >= 0) newY = 0;
     if (moveX == 0) newX = 0;
     if (moveY == 0) newY = 0;
-    
+
     if (moveX == 0 && moveY == 0)
       break;
     if (newX == 0 && newY == 0)
@@ -256,6 +256,6 @@ void Entity::OnCleanup() {
   if (entitySurface) {
     SDL_FreeSurface(entitySurface);
   }
-  
+
   entitySurface = NULL;
 }

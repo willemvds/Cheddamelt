@@ -1,7 +1,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 class Animation {
 private:

@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "Animation.h"
 #include "Area.h"
 #include "Camera.h"
